@@ -1,8 +1,9 @@
+
 /**
  * Uses AJAX to query an internet data source for zip codes
  * @param {string} zipId The element id that has the zip code
  */
-function findMusic(music) {
+function Music(music) {
     // First get the zip code from the HTML textbox
     var yourmusic = document.getElementById(music).value;
     // Now make a HTTP request
@@ -12,10 +13,10 @@ function findMusic(music) {
             // We got a response from the server!
             if(this.status === 200) {
                 // The request was successful!
-                displayfindMusic(this.responseText);
+                displayMusic(this.responseText);
             } else if (this.status === 404){
                 // No postal code found
-                displayfindMusic('{ "songs" : "none" }');
+                displayMusic('{ "songs" : "none" }');
             } else {
                 console.log("We have a problem: " + this.status);
             }
@@ -24,7 +25,7 @@ function findMusic(music) {
         }
     };
     // Notice how the URL is appended with the zip code
-    var url = "https://www.mixcloud.com/discover/funk/"
+    var url = " https://api.mixcloud.com/discover/funk/";
     httpRequest.open("GET", url, true);
     httpRequest.send();
 }
@@ -32,7 +33,7 @@ function findMusic(music) {
  * Displays the zip code place given the JSON data
  * @param {string} data JSON data representing place for given zip code
  */
-function displayfindMusic(data){
+function displayMusic(data){
     var music = JSON.parse(data);
     if(music.songs === "none") {
         document.getElementById("music").className = "alert alert-warning";
