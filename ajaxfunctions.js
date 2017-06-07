@@ -1,45 +1,54 @@
-
-/**
+  /**
  * Uses AJAX to query an internet data source for zip codes
- * @param {string} zipId The element id that has the zip code
+ * @param {string} songId  The element id that has the zip code
  */
-function Music(music) {
-    // First get the zip code from the HTML textbox
-    var yourmusic = document.getElementById(music).value;
-    // Now make a HTTP request
-    var httpRequest = new XMLHttpRequest();
+
+ function getId(songId) {
+
+    var song = document.getElementsByName(songId);
+    var song_name = "";
+    for(i = 0; i < song.length; i++){
+        if(song[i].selected){
+            song_name = song[i].value;
+        }
+    }
+
+
+    console.log(song_name);
+     var httpRequest = new XMLHttpRequest();
     httpRequest.onreadystatechange = function () {
         if (this.readyState === 4) {
             // We got a response from the server!
             if(this.status === 200) {
                 // The request was successful!
-                displayMusic(this.responseText);
+                console.log("successful request!");
+                displaySong(this.responseText);
             } else if (this.status === 404){
-                // No postal code found
-                displayMusic('{ "songs" : "none" }');
+                // No strike number found
+                 console.log("request failed");
+                displaySong('{ "artist" : "none" }');
             } else {
-                console.log("We have a problem: " + this.status);
+                console.log("We have a problem...server responded with code: " + this.status);
             }
         } else {
-            // Waiting for a response...
         }
     };
-    // Notice how the URL is appended with the zip code
-    var url = " https://api.mixcloud.com/discover/funk/";
-    httpRequest.open("GET", url, true);
-    httpRequest.send();
-}
-/**
- * Displays the zip code place given the JSON data
- * @param {string} data JSON data representing place for given zip code
- */
-function displayMusic(data){
-    var music = JSON.parse(data);
-    if(music.songs === "none") {
-        document.getElementById("music").className = "alert alert-warning";
-        document.getElementById("music").innerHTML = "The songs are" + music;
-    } else {
-        document.getElementById("music").className = "alert alert-success";
-        document.getElementById("music").innerHTML ="there are no songs for this artist"
+
+        var url = " https://api.mixcloud.com/discover/funk/";
+        httpRequest.open("GET", url, true);
+        httpRequest.send();
     }
-}
+
+    function displaySong(data){
+        var song = JSON.parse(data);
+        if(song.songs === "none") {
+            document.getElementById("output").className = "alert alert-warning";
+            document.getElementById("output").innerHTML ="there are no songs for this artist"
+        } else {
+            document.getElementById("output").className = "alert alert-success";
+            document.getElementById("output").innerHTML =song.text;
+        }
+    }
+
+
+
