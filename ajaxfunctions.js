@@ -34,7 +34,7 @@
         }
     };
 
-        var url = " https://api.mixcloud.com/discover/funk/";
+        var url = "https://api.mixcloud.com/discover/funk/";
         httpRequest.open("GET", url, true);
         httpRequest.send();
     }
@@ -46,7 +46,7 @@
             document.getElementById("output").innerHTML ="there are no songs for this artist"
         } else {
             document.getElementById("output").className = "alert alert-success";
-            document.getElementById("output").innerHTML =song.text;
+            document.getElementById("output").innerHTML = song.text;
         }
     }
 
