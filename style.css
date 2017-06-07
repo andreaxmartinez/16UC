@@ -1,15 +1,16 @@
 body {
     background-color: gray;
 }
+
 h2 {
- color: limegreen;
+    color: limegreen;
 }
 
 p {
- color: white;
-     font: italic bold 12px/30px Georgia, serif;
+    color: white;
+    font: italic bold 12px/30px Georgia, serif;
 }
 
 body {
- font-family: Gill Sans, sans-serif;
+    font-family: Gill Sans, sans-serif;
 }
